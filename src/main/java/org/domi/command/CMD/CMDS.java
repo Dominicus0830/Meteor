@@ -2,10 +2,7 @@ package org.domi.command.CMD;
 
 import org.CatAndDomi.api.NBT;
 import org.CatAndDomi.utils.ColorUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
@@ -17,6 +14,7 @@ import java.util.Random;
 
 public class CMDS {
     private static final Random random = new Random();
+    private static World world;
     public static void wands(Player player) {
         ItemStack item = NBT.setStringTag(new ItemStack(Material.STICK), "domi", "true");
         ItemMeta im = item.getItemMeta();
@@ -26,7 +24,7 @@ public class CMDS {
     }
 
     public static void meteorInt(Player player, int counts) {
-
+        world = Bukkit.getWorld("world");
         Location[] locations = Events.playerLocations.get(player);
 
         if (locations == null || locations[0] == null || locations[1] == null) {
@@ -53,7 +51,7 @@ public class CMDS {
             FallingBlock fallingBlock = player.getWorld().spawnFallingBlock(spawnLocation, Material.MAGMA_BLOCK.createBlockData());
 
             for (int ef = 0; ef < 10; ef++) {
-                player.getWorld().spawnParticle(Particle.SMOKE_LARGE, spawnLocation, 10);
+                world.spawnParticle(Particle.SMOKE_LARGE, spawnLocation, 20);
             }
         }
     }

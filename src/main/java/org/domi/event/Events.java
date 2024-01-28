@@ -35,7 +35,7 @@ public class Events implements Listener {
                 Location explosionLocation = fallingBlock.getLocation();
                 fallingBlock.getWorld().createExplosion(explosionLocation, 4F);  // 마그마 블록 위치에서 폭발을 생성
 
-                for (int i = 0; i < 25; i++) {  // 불을 10개 붙임
+                for (int i = 0; i < 35; i++) {  // 불을 10개 붙임
                     int x = explosionLocation.getBlockX() + getRandomBetween(-5, 5);  // 폭발 지점 주위의 랜덤한 위치
                     int y = explosionLocation.getBlockY() + getRandomBetween(-5, 5);
                     int z = explosionLocation.getBlockZ() + getRandomBetween(-5, 5);
