@@ -1,5 +1,6 @@
 package org.domi.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.domi.METEOR;
@@ -13,8 +14,8 @@ public class Commands {
     }
 
     public static void meteorCount(CommandSender commandSender, Integer i, String... strings) {
-        if(commandSender instanceof Player p) {
-            CMDS.meteorInt(p, i);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            CMDS.meteorInt(player, i);
         }
     }
 }

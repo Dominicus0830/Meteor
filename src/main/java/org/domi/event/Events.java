@@ -3,6 +3,7 @@ package org.domi.event;
 import org.CatAndDomi.api.NBT;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +22,7 @@ public class Events implements Listener {
     private static final METEOR plugin = METEOR.getInstance();
     private final Random random = new Random();
     public static final Map<Player, Location[]> playerLocations = new HashMap<>();
+    public static YamlConfiguration config;
 
     public Events() {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -59,7 +61,15 @@ public class Events implements Listener {
                     Location[] locations = playerLocations.getOrDefault(player, new Location[2]);
                     locations[0] = event.getClickedBlock().getLocation();
                     playerLocations.put(player, locations);
-                    player.sendMessage("pos1 설정완료! x 자표: " + event.getClickedBlock().getLocation().getBlockX() + "z 자표:" +event.getClickedBlock().getLocation().getBlockZ());
+                    player.sendMessage("pos1 설정완료! x 자표: " + event.getClickedBlock().getLocation().getBlockX() + " z 자표:" +event.getClickedBlock().getLocation().getBlockZ());
+                    int x = event.getClickedBlock().getLocation().getBlockX();
+                    int y = event.getClickedBlock().getLocation().getBlockY();
+                    int z = event.getClickedBlock().getLocation().getBlockZ();
+                    config = plugin.config;
+                    config.set("minx", x);
+                    config.set("miny", y);
+                    config.set("minz", z);
+                    plugin.saveConfig();
                     event.setCancelled(true);
                 }
             }
@@ -69,8 +79,15 @@ public class Events implements Listener {
                     Location[] locations = playerLocations.getOrDefault(player, new Location[3]);
                     locations[1] = event.getClickedBlock().getLocation();
                     playerLocations.put(player, locations);
-                    //send x y z
-                    player.sendMessage("pos2 설정완료! 자표: " + event.getClickedBlock().getLocation().getBlockX() + "z 자표:" +event.getClickedBlock().getLocation().getBlockZ());
+                    player.sendMessage("pos2 설정완료! 자표: " + event.getClickedBlock().getLocation().getBlockX() + " z 자표:" +event.getClickedBlock().getLocation().getBlockZ());
+                    int x = event.getClickedBlock().getLocation().getBlockX();
+                    int y = event.getClickedBlock().getLocation().getBlockY();
+                    int z = event.getClickedBlock().getLocation().getBlockZ();
+                    config = plugin.config;
+                    config.set("maxx", x);
+                    config.set("maxy", y);
+                    config.set("maxz", z);
+                    plugin.saveConfig();
                     event.setCancelled(true);
                 }
             }
